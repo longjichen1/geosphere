@@ -4,10 +4,16 @@ import Nav from './components/Nav';
 import Nasa from './components/Nasa';
 
 function App() {
-  document.body.style.backgroundColor = 'black'
-
+  
+  document.body.style.backgroundColor='black';
   return (
-    <Nav/>
+    <>
+    
+      
+      <Nav/>
+      
+    </>
+    
     
   );
 }
