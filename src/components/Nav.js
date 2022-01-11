@@ -5,6 +5,7 @@ function Nav() {
   const [photoData, setPhotoData] = useState(null);
   const [blur, setBlur] = useState(false);
   const [blurIcon, setBlurIcon] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
     const generateRandomDate = () =>{
       const year = Math.floor(Math.random() * 18) + 1;
       const date = Math.floor(Math.random() * 27) + 1;
@@ -56,14 +57,24 @@ function Nav() {
       <nav className = "flex items-center justify-between flex-wrap  p-4">
         <div className="p-4 flex items-center flex-shrink-0 text-white mr-6 ">
             <img  onClick = {() =>{blur? setBlur(false):setBlur(true)}}className = {`${!blur? 'animate-pulse hover:outline-white': 'hover:outline-white'} delay-200 p-0  outline outline-4 outline-slate-900 outline-offset-4 rounded-full  ${blurIcon? 'animate-spin':''}`} src={earthLogo} style={{maxWidth: 70, margin:0}}></img>
-            <span className="font-semibold text-2xl tracking-widest pl-4">GeoSphere</span>
+            <span className="font-semibold text-3xl tracking-widest pl-7">GeoSphere</span>
         </div>
         <div className = "block lg:hidden">
             
         </div>
-        <p className="hover:visible translate-y-5 duration-1000 justify-center text-center">hello</p>
+        {/* login thing here */}
+        
       </nav>
-      
+      <br/>
+      <ul className="pl-8">
+        <li className= {`${!blur? 'scale-0 left-0': 'translate-x-28 scale-150'} hover:duration-75 hover:text-slate-800 inline-block transform  duration-1000  text-white`}><a href="/">Home</a></li>
+        <br/><br/><br/>
+        <li className= {`${!blur? 'scale-0 left-0': 'translate-x-28 scale-150'}  hover:duration-75 hover:text-slate-800 inline-block transform  duration-1000  text-white`}><a href="/about">About</a></li>
+        <br/><br/><br/>
+        <li className= {`${!blur? 'scale-0 left-0': 'translate-x-28 scale-150'}  hover:duration-75 hover:text-slate-800 inline-block transform  duration-1000  text-white`}><a href= {`/${loggedIn? 'gallery': 'login'}`}>{loggedIn? 'Gallery': 'Login'}</a></li>
+        <br/><br/><br/>
+      </ul>
+    
       {/* <button onClick = {() =>{blur? setBlur(false):setBlur(true)}} className = "bg-white text-black uppercase">CLICK</button> */}
     </div>
     </>
