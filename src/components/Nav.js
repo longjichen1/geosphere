@@ -3,21 +3,28 @@ import earthLogo from "../images/earth-logo.png";
 
 function Nav() {
 
-    function useLocalStorageState(key, defaultValue = ''){
-      const [state, setState] = useState(()=>
-        window.localStorage.getItem(key) || defaultValue,
-      );
-      useEffect(()=>{
-        window.localStorage.setItem(key, state)
-      }, [state])
-
-      return [state, setState]
-    }
+    
     const [photoData, setPhotoData] = useState(null);
     const [blur, setBlur] = useState(false);
     const [blurIcon, setBlurIcon] = useState(false);
     const [loggedIn, setLoggedIn] = useState(true);
     
+    useEffect(()=>{
+      window.localStorage.setItem('photoData', photoData);
+    }, [photoData]);
+
+    useEffect(()=>{
+      window.localStorage.setItem('blur', blur);
+    }, [blur]);
+
+    useEffect(()=>{
+      window.localStorage.setItem('blurIcon', blurIcon);
+    }, [blurIcon]);
+
+    useEffect(()=>{
+      window.localStorage.setItem('loggedIn', loggedIn);
+    }, [loggedIn]);
+
     const generateRandomDate = () =>{
       const year = Math.floor(Math.random() * 18) + 1;
       const date = Math.floor(Math.random() * 27) + 1;
