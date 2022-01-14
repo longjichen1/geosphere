@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from "react";
 import earthLogo from "../images/earth-logo.png";
-
-function Nav() {
-
-    
-    const [photoData, setPhotoData] = useState(null);
-    const [blur, setBlur] = useState(false);
-    const [blurIcon, setBlurIcon] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(true);
-    
+import image from "../images/light.jpg"
+function Nav({photoData, setPhotoData, blur, setBlur, blurIcon, setBlurIcon, loggedIn, setLoggedIn}) {
     useEffect(()=>{
       window.localStorage.setItem('photoData', photoData);
     }, [photoData]);
@@ -70,7 +63,7 @@ function Nav() {
     
   return(
     <>    
-    <div id="background" className= {`background h-screen ${blur? 'blur-sm saturate-50': 'blur-none saturate-100'} -z-20 transition-all duration-300`} style={{backgroundImage:`url('https://coolwallpapers.me/picsup/5814157-meteor-wallpapers.jpg')`, backgroundPosition:'center',backgroundSize:'cover', position:'absolute', backgroundRepeat:'repeat', left:'0', right:'0', top:'0', bottom:'0'}}></div>
+    <div id="background" className= {`background h-screen ${blur? 'blur-sm saturate-50': 'blur-none saturate-100'} -z-20 transition-all duration-300`} style={{backgroundImage:`url(${image})`, backgroundPosition:'center',backgroundSize:'contain', position:'absolute', backgroundRepeat:'repeat', left:'0', right:'0', top:'0', bottom:'0'}}></div>
 
     {/* <img id="background"src="https://coolwallpapers.me/picsup/5814157-meteor-wallpapers.jpg" className= {`background h-screen ${blur? 'blur-sm saturate-50': 'blur-none saturate-100'} -z-10 absolute transition-all duration-300`} style={{ left:'0', right:'0', top:'0', bottom:'0'}}/> */}
 
@@ -78,7 +71,7 @@ function Nav() {
       <nav className = "absolute flex items-center justify-between flex-wrap  p-4">
         <div className="p-4 flex items-center flex-shrink-0 text-white mr-6 ">
             <img  onClick = {() =>{blur? setBlur(false):setBlur(true)}}className = {`${!blur? 'animate-pulse hover:outline-slate-900 hover:duration-150': 'hover:outline-slate-900 hover:duration-150'} delay-200 p-0  z-40 outline outline-4 outline-white outline-offset-4 rounded-full  ${blurIcon? 'animate-spin':''}`} src={earthLogo} style={{maxWidth: 70, margin:0}}></img>
-            <span className="z-40 font-semibold text-3xl tracking-widest pl-7">GeoSphere</span>
+            <span className="z-40 font-semibold text-3xl tracking-widest pl-7"><a href="/">GeoSphere</a></span>
         </div>
         <div className = "block lg:hidden">
             
