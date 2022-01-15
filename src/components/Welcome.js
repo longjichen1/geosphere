@@ -23,8 +23,7 @@ export default function Welcome({
     }-${date > 9 ? date : `0${date}`}`;
     return link;
   };
-  let dt = `&date=${generateRandomDate()}`;
-  var dat = 0;
+
   function fetchPhoto(link) {
     fetch(
       `https://api.nasa.gov/planetary/apod?api_key=E7O3bEYfrE32xI20de2cTgogKrwLH01sy0WdtGtn${link}`
@@ -32,14 +31,7 @@ export default function Welcome({
       .then((response) => response.json())
       .then((data) => setPhotoData(data));
   }
-  useEffect(() => {
-    fetchPhoto(dt);
-  }, [dat]);
-  if (!photoData) {
-    fetchPhoto("");
-    dat++;
-    console.log(dat);
-  }
+
   const handleStarted = () => {
     setStarted(true);
     setTimeout(function () {
