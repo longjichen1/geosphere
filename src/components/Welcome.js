@@ -24,12 +24,11 @@ export default function Welcome({
     return link;
   };
 
-  function fetchPhoto(link) {
-    fetch(
+  async function fetchPhoto(link) {
+    const result = await fetch(
       `https://api.nasa.gov/planetary/apod?api_key=E7O3bEYfrE32xI20de2cTgogKrwLH01sy0WdtGtn${link}`
-    )
-      .then((response) => response.json())
-      .then((data) => setPhotoData(data));
+    );
+    setPhotoData(await result.json());
   }
 
   const handleStarted = () => {
