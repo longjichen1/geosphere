@@ -2,43 +2,9 @@ import React, {useEffect, useState} from "react";
 import earthLogo from "../images/earth-logo.png";
 import image from "../images/light.jpg"
 function Nav({photoData, setPhotoData, blur, setBlur, blurIcon, setBlurIcon, loggedIn, setLoggedIn}) {
-    useEffect(()=>{
-      window.localStorage.setItem('photoData', photoData);
-    }, [photoData]);
 
-    useEffect(()=>{
-      window.localStorage.setItem('blur', blur);
-    }, [blur]);
 
-    useEffect(()=>{
-      window.localStorage.setItem('blurIcon', blurIcon);
-    }, [blurIcon]);
 
-    useEffect(()=>{
-      window.localStorage.setItem('loggedIn', loggedIn);
-    }, [loggedIn]);
-
-    const generateRandomDate = () =>{
-      const year = Math.floor(Math.random() * 18) + 1;
-      const date = Math.floor(Math.random() * 27) + 1;
-      const month = Math.floor(Math.random() * 11) + 1;
-      const link = `20${year > 9? year: `0${year}`}-${month > 9? month: `0${month}`}-${date > 9? date: `0${date}`}`;
-      return link;
-    }
-    let dt = `&date=${generateRandomDate()}`;
-    var dat = 0;
-    function fetchPhoto(){
-      fetch(`https://api.nasa.gov/planetary/apod?api_key=E7O3bEYfrE32xI20de2cTgogKrwLH01sy0WdtGtn${dt}`)
-          .then(response => response.json())
-          .then((data) => setPhotoData(data))
-    }
-    useEffect(()=>{
-      fetchPhoto();
-    }, [dat]);
-    if (!photoData){
-      dat++;
-      console.log(dat)
-    }
     // if (photoData) {
     //   const body = document.body.style;
     //   body.background =`url(${photoData.url}), url(${photoData.url})`
@@ -63,7 +29,7 @@ function Nav({photoData, setPhotoData, blur, setBlur, blurIcon, setBlurIcon, log
     
   return(
     <>    
-    <div id="background" className= {`background h-screen ${blur? 'blur-sm saturate-50': 'blur-none saturate-100'} -z-20 transition-all duration-300`} style={{backgroundImage:`url(${image})`, backgroundPosition:'center',backgroundSize:'contain', position:'absolute', backgroundRepeat:'repeat', left:'0', right:'0', top:'0', bottom:'0'}}></div>
+    <div id="background" className= {`background h-screen ${blur? 'blur-sm saturate-50': 'blur-none saturate-100'} -z-20 transition-all duration-300`} style={{backgroundImage:`url(${image})`, backgroundPosition:'bottom',backgroundSize:'cover', position:'absolute', backgroundRepeat:'repeat', left:'0', right:'0', top:'0', bottom:'0'}}></div>
 
     {/* <img id="background"src="https://coolwallpapers.me/picsup/5814157-meteor-wallpapers.jpg" className= {`background h-screen ${blur? 'blur-sm saturate-50': 'blur-none saturate-100'} -z-10 absolute transition-all duration-300`} style={{ left:'0', right:'0', top:'0', bottom:'0'}}/> */}
 
@@ -80,7 +46,7 @@ function Nav({photoData, setPhotoData, blur, setBlur, blurIcon, setBlurIcon, log
         
       </nav>
       <br/>
-      <ul className = " pt-28 text-xl absolute">
+      <ul className = " pt-28 text-xl absolute z-40">
         <li className = {`${!blur? 'scale-0 left-0 delay-500': 'translate-x-36 scale-150 delay '} hover:duration-75 hover:text-slate-800 inline-block transform  duration-700  text-white`}><a href="/">Home</a></li>
         <br/><br/><br/>
         <li className={`${!blur? 'scale-0 left-0 delay-300': 'translate-x-36 scale-150 delay-300'} hover:duration-75 inline-block transform  duration-700  text-white`}><a className='hover:text-slate-800' href="/about">About</a></li>
