@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-export default function Welcome({
-  photoData,
-  setPhotoData,
-  blur,
-  setBlur,
-  blurIcon,
-  setBlurIcon,
-  loggedIn,
-  setLoggedIn,
-}) {
+export default function Welcome({ blur, setBlur, loggedIn, setLoggedIn }) {
+  const [photoData, setPhotoData] = useState("");
   const [started, setStarted] = useState(false);
   const [started2, setStarted2] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -23,7 +15,9 @@ export default function Welcome({
     }-${date > 9 ? date : `0${date}`}`;
     return link;
   };
-
+  useEffect(() => {
+    fetchPhoto(`&date=${generateRandomDate()}`);
+  }, []);
   async function fetchPhoto(link) {
     const result = await fetch(
       `https://api.nasa.gov/planetary/apod?api_key=E7O3bEYfrE32xI20de2cTgogKrwLH01sy0WdtGtn${link}`
@@ -71,7 +65,7 @@ export default function Welcome({
       }, 600);
     }
   };
-  console.log(photoData);
+
   return (
     <>
       {startButton}
@@ -94,7 +88,7 @@ export default function Welcome({
           expanded
             ? " scale-100  transform duration-[2200]"
             : "p-4 duration-500 origin-center"
-        } border-8 border-orange-400 `}
+        } border-8 border-orange-400 absolute`}
       >
         <div
           style={{
@@ -108,7 +102,7 @@ export default function Welcome({
           }}
           className={`${blur ? "blur-sm" : ""} absolute ${
             first ? " delay-75" : "opacity-100 delay-300"
-          } transform top-2 left-4 block border-4 border-white`}
+          } transform top-2 left-4 block border-4 absolute border-white`}
         >
           {/* <img style={{borderRadius:"48px"}} className={`${!first?'opacity-0 delay-200':'opacity-100 delay-500'} transform duration-1000 h-full w-full flex-shrink-0 flex`} src={photoData? photoData.url: ''} alt="" /> */}
         </div>

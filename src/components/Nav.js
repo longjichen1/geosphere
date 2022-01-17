@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
 import earthLogo from "../images/earth-logo.png";
 import image from "../images/light.jpg";
-function Nav({
-  photoData,
-  setPhotoData,
-  blur,
-  setBlur,
-  blurIcon,
-  setBlurIcon,
-  loggedIn,
-  setLoggedIn,
-}) {
-  // if (photoData) {
-  //   const body = document.body.style;
-  //   body.background =`url(${photoData.url}), url(${photoData.url})`
-
-  //   body.backgroundPosition = 'center, center';
-
-  //   body.backgroundSize = 'contain';
-  //   body.backgroundRepeat = 'no-repeat, repeat';
-  //   body.width = '90vw';
-  //   body.height = '90vh';
-  // }else{
-  //   document.body.style.background = 'black';
-  // }
-  function handleBlurIcon() {
-    if (blurIcon === true) {
-      setBlurIcon(false);
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
+function Nav({ blur, setBlur, loggedIn, setLoggedIn, loginBox, setLoginBox }) {
+  const logout = () => {
+    signOut(auth);
+  };
+  function handleBlur() {
+    if (blur === true) {
+      setBlur(false);
+      setLoginBox(false);
     } else {
-      setBlurIcon(true);
+      setBlur(true);
     }
-    console.log(blurIcon);
   }
 
+  function handleLogin() {
+    if (!loggedIn) {
+      console.log("hi");
+      if (loginBox === true) {
+        setLoginBox(false);
+      } else {
+        setLoginBox(true);
+      }
+    }
+    console.log(loginBox);
+  }
   return (
     <>
       <div
@@ -60,15 +54,13 @@ function Nav({
           <div className="p-4 flex items-center flex-shrink-0 text-white mr-6 ">
             <img
               onClick={() => {
-                blur ? setBlur(false) : setBlur(true);
+                handleBlur();
               }}
               className={`${
                 !blur
                   ? "animate-pulse hover:outline-slate-900 hover:duration-150"
                   : "hover:outline-slate-900 hover:duration-150"
-              } delay-200 p-0  z-40 outline outline-4 outline-white outline-offset-4 rounded-full  ${
-                blurIcon ? "animate-spin" : ""
-              }`}
+              } delay-200 p-0  z-40 outline outline-4 outline-white outline-offset-4 rounded-full  `}
               src={earthLogo}
               style={{ maxWidth: 70, margin: 0 }}
             ></img>
@@ -83,21 +75,7 @@ function Nav({
         <ul className=" pt-28 text-xl absolute z-40">
           <li
             className={`${
-              !blur
-                ? "scale-0 left-0 delay-500"
-                : "translate-x-36 scale-150 delay "
-            } hover:duration-75 hover:text-slate-800 inline-block transform  duration-700  text-white`}
-          >
-            <a href="/">Home</a>
-          </li>
-          <br />
-          <br />
-          <br />
-          <li
-            className={`${
-              !blur
-                ? "scale-0 left-0 delay-300"
-                : "translate-x-36 scale-150 delay-300"
+              !blur ? "scale-0 left-0 delay-500" : "translate-x-36 scale-150 "
             } hover:duration-75 inline-block transform  duration-700  text-white`}
           >
             <a className="hover:text-slate-800" href="/about">
@@ -109,18 +87,33 @@ function Nav({
           <br />
           <li
             className={`${
-              !blur ? "scale-0 left-0" : "translate-x-36 scale-150 delay-500"
+              !blur
+                ? "scale-0 left-0 delay-300 "
+                : "translate-x-36 scale-150 delay-300"
             }  hover:duration-75  inline-block transform  duration-700  text-white`}
           >
-            <a
-              className="hover:text-slate-800"
-              href={`/${loggedIn ? "gallery" : "login"}`}
-            >
+            <a className="hover:text-slate-800" onClick={() => handleLogin()}>
               {loggedIn ? "Gallery" : "Login"}
             </a>
-          </li>{" "}
+          </li>
           <br />
           <br />
+          <br />
+          {loggedIn ? (
+            <li
+              className={`${
+                !blur
+                  ? "scale-0 left-0 delay-150"
+                  : "translate-x-36 scale-150 delay-500"
+              } hover:duration-75 inline-block transform opacity-100 duration-700  text-white`}
+            >
+              <a className="hover:text-slate-800" onClick={logout}>
+                Logout
+              </a>
+            </li>
+          ) : (
+            <div></div>
+          )}
         </ul>
         {/* <h1 className={`origin-center -rotate-90 text-center text-4xl text-white absolute transform top-full -left-4 ${blur? 'translate-y-120px':'translate-y-96 scale-100 duration-1000'}`}>Menu ➤</h1> */}
 
