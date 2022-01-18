@@ -20,6 +20,8 @@ function Nav({
   };
   function handleBlur() {
     if (blur === true) {
+      setAbout(false);
+      setGallery(false);
       setBlur(false);
       setLoginBox(false);
     } else {
