@@ -100,7 +100,7 @@ export default function Login({
       <br />
       <input
         type="email"
-        className={`invalid:text-red-600 required invalid:border-red-600 text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+        className={`invalid:text-red-600 md:text-xl md:p-2 required invalid:border-red-600 text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
         placeholder="Email..."
         onChange={(event) => {
           setSignUpError(false);
@@ -111,7 +111,7 @@ export default function Login({
       <br />
       <input
         type="password"
-        className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+        className={`text-black text-3xl md:text-xl p-6 md:p-2 border-4 border-none rounded-3xl m-auto block`}
         placeholder="Password..."
         onChange={(event) => {
           setSignUpError(false);
@@ -123,13 +123,13 @@ export default function Login({
   );
   const loginElement = (
     <div
-      className={`border-white border-4 absolute m-auto left-0 right-0 w-[78rem] ${
+      className={`border-white border-4 absolute m-auto left-0 right-0 w-[78rem] z-20 ${
         loginBox && blur ? "opacity-100" : "opacity-0 scale-0"
-      } top-0 bottom-0 h-[45rem] rounded-3xl z-40 transform duration-300 bg-slate-800 bg-opacity-80 text-3xl`}
+      } top-0 bottom-0 h-[45rem] rounded-3xl z-20 transform duration-300 md:w-[70%] sm:w-[40%] sm:h-[50%] md:h-[70%] lg:w-[80$] bg-slate-800 bg-opacity-80 text-3xl`}
     >
       <div
         id="login"
-        className={`absolute top-0 m-auto bottom-0 left-8 overflow-hidden inline-block  h-[38rem] w-[35rem] rounded-3xl border-blue-600 border-4`}
+        className={`absolute top-0 md:w-[45%] md:h-[80%] m-auto bottom-0 left-8 overflow-hidden inline-block  h-[38rem] w-[35rem] rounded-3xl border-blue-600 border-4`}
       >
         <h1
           className={`text-white text-center bg-blue-900 p-4 z-38 border-blue-600 border-b-4 `}
@@ -145,7 +145,7 @@ export default function Login({
       </div>
       <div
         id="signup"
-        className={`absolute inline-block m-auto top-0 bottom-0 overflow-hidden h-[38rem] border-4 border-red-400 rounded-3xl w-[35rem] right-8`}
+        className={`absolute md:w-[45%] md:h-[80%] inline-block m-auto top-0 bottom-0 overflow-hidden h-[38rem] border-4 border-red-400 rounded-3xl w-[35rem] right-8`}
       >
         <h1
           className={`text-white text-center bg-orange-700 p-4 z-38 border-red-400 border-b-4 `}
@@ -156,7 +156,7 @@ export default function Login({
         <br />
         <input
           type="password"
-          className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+          className={`text-black md:text-xl md:p-2 text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
           placeholder="Confirm Password..."
           onChange={(event) => {
             setSignUpError(false);

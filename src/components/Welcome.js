@@ -59,16 +59,15 @@ export default function Welcome({
   const startButton = (
     <>
       <div
-        style={{ maxWidth: "30%", marginTop: "19%" }}
         className={` ${blur ? "blur-sm" : ""}  ${
           started ? "scale-0 duration-500" : "duration-700"
         } ${
           started2 ? "absolute" : ""
-        } hover:bg-opacity-0 hover:bg-slate-600 hover:text-orange-800 hover:delay-200 bg-slate-800 bg-opacity-70  group m-auto outline rounded-full outline-8 outline-white p-4 text-center`}
+        } hover:bg-opacity-0 hover:bg-slate-600 top-[40%] absolute left-0 right-0 md:max-w-sm lg:max-w-md sm:max-w-[15rem] hover:text-orange-800 hover:delay-200 bg-slate-800 bg-opacity-70  group m-auto outline rounded-full outline-8 outline-white p-4 text-center`}
       >
         <h1
           onClick={() => handleStarted()}
-          className="p-3 h-max w-max mx-auto text-center pt-1/2 text-7xl text-white uppercase font-semibold hover:text-transparent bg-clip-text bg-gradient-to-r duration-300 from-blue-400 to-orange-600"
+          className="p-3 h-max w-max md:text-3xl lg:text-5xl sm:text-lg mx-auto text-center pt-1/2 text-7xl text-white uppercase font-semibold hover:text-transparent bg-clip-text bg-gradient-to-r duration-300 from-blue-400 to-orange-600"
         >
           Get started
         </h1>

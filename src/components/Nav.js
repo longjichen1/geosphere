@@ -101,7 +101,7 @@ function Nav({
           {/* login thing here */}
         </nav>
         <br />
-        <ul className=" pt-28 text-xl absolute z-40">
+        <ul className=" pt-28 text-xl absolute z-40 ">
           <li
             className={`${
               !blur ? "scale-0 left-0 delay-500" : "translate-x-36 scale-150 "

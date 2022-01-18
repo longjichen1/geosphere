@@ -1,7 +1,6 @@
 {
-  
   "name": "geosphere",
-  "homepage" : "https://longjichen1.github.io/geosphere",
+  "homepage": "https://longjichen1.github.io/geosphere",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
