@@ -194,15 +194,19 @@ export default function Welcome({
           }}
           className={`${
             blur ? "blur-sm" : ""
-          } bg-black bg-opacity-40 transform duration-1000 absolute  bottom-0 left-4 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
+          } bg-black bg-opacity-40 transform duration-500 absolute hover:bg-opacity-60 bottom-0 left-4 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
         >
-          <button onClick={() => addPhoto(photoData)} className={` p-1`}>
+          <button
+            onClick={() => addPhoto(photoData)}
+            className={`hover:fill-pink-400  p-1`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class={`h-10 w-10 text-center${
-                like ? "border-red-500" : "border-white"
-              } `}
-              fill={like ? "red" : "white"}
+              class={`h-10 w-10 text-center ${
+                like
+                  ? "border-red-600 fill-red-600"
+                  : "border-white fill-white hover:fill-red-400 "
+              } hover:border-pink-400 p-1 animate-pulse`}
               viewBox="0 0 24 24"
               stroke="none"
             >
