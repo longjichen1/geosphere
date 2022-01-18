@@ -3,7 +3,16 @@ import earthLogo from "../images/earth-logo.png";
 import image from "../images/light.jpg";
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
-function Nav({ blur, setBlur, loggedIn, setLoggedIn, loginBox, setLoginBox }) {
+function Nav({
+  blur,
+  setBlur,
+  loggedIn,
+  setLoggedIn,
+  loginBox,
+  setLoginBox,
+  about,
+  setAbout,
+}) {
   const logout = () => {
     signOut(auth);
   };
@@ -18,14 +27,20 @@ function Nav({ blur, setBlur, loggedIn, setLoggedIn, loginBox, setLoginBox }) {
 
   function handleLogin() {
     if (!loggedIn) {
-      console.log("hi");
       if (loginBox === true) {
         setLoginBox(false);
       } else {
         setLoginBox(true);
       }
     }
-    console.log(loginBox);
+  }
+
+  function toggleAbout() {
+    if (about) {
+      setAbout(false);
+    } else {
+      setAbout(true);
+    }
   }
   return (
     <>
@@ -78,7 +93,7 @@ function Nav({ blur, setBlur, loggedIn, setLoggedIn, loginBox, setLoginBox }) {
               !blur ? "scale-0 left-0 delay-500" : "translate-x-36 scale-150 "
             } hover:duration-75 inline-block transform  duration-700  text-white`}
           >
-            <a className="hover:text-slate-800" href="/about">
+            <a className="hover:text-slate-800" onClick={() => toggleAbout()}>
               About
             </a>
           </li>

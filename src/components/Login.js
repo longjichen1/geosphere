@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Button from "./Button";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, firestore } from "../firebase-config";
+
 export default function Login({
   blur,
   setBlur,
@@ -11,35 +14,97 @@ export default function Login({
   setLoggedIn,
   loginBox,
   setLoginBox,
+  photoData,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPW, setConfirmPW] = useState("");
+  const [loginError, setLoginError] = useState(false);
+  const [signUpError, setSignUpError] = useState(false);
   const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(user);
-      setLoggedIn(true);
-    } catch (error) {
-      console.log(error.message);
+    if (confirmPW === password) {
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        setLoggedIn(true);
+        setTimeout(setSignUpError(false), 1000);
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      setSignUpError(true);
     }
   };
 
   const login = async () => {
+    setTimeout(setLoginError(false), 1000);
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.log(error.message);
+
+      setLoginError(true);
     }
   };
+  const loginErrorElement = (
+    <>
+      <br />
+      <p className="text-red-600 transform duration-500 opacity-100 text-center w-5/6 m-auto text-2xl">
+        Invalid Email/Password Combination. Please try again!
+      </p>
+    </>
+  );
+
+  const signUpErrorPassword = (
+    <>
+      {confirmPW.length >= 8 ? (
+        <p className="text-red-600 text-center text-3xl">
+          Email already in use!
+        </p>
+      ) : (
+        <p className="text-red-600 text-center text-3xl">
+          Password must be at least 8 characters in length!
+        </p>
+      )}
+    </>
+  );
+  const signUpErrorElement = (
+    <>
+      <br />
+
+      {!(confirmPW === password) ? (
+        <p className="text-red-600 text-center text-2xl">
+          Passwords do not match!
+        </p>
+      ) : (
+        <>
+          {password.length >= 8 ? (
+            <p className="text-red-600 text-center text-2xl">
+              Email already in use!
+            </p>
+          ) : (
+            <p className="text-red-600 text-center text-2xl">
+              Password must be at least 6 characters in length!
+            </p>
+          )}
+        </>
+      )}
+    </>
+  );
+
   const inputForm = (
     <>
       <br />
       <input
         type="email"
-        className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+        className={`invalid:text-red-600 required invalid:border-red-600 text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
         placeholder="Email..."
         onChange={(event) => {
+          setSignUpError(false);
+          setLoginError(false);
           setEmail(event.target.value);
         }}
       />
@@ -49,6 +114,8 @@ export default function Login({
         className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
         placeholder="Password..."
         onChange={(event) => {
+          setSignUpError(false);
+          setLoginError(false);
           setPassword(event.target.value);
         }}
       />
@@ -72,45 +139,9 @@ export default function Login({
         {inputForm}
         <br />
         <div className="text-center">
-          <button
-            className="bg-green-300 
-          
-    text-lg
-    text-black
-    h-auto 
-    w-max 
-    transition
-    transform
-    duration-700
-    hover:scale-110
-    text-center 
-    font-rob 
-    pt-2
-    pb-2
-    px-4
-    rounded-lg
-    focus:outline-none
-    active:opacity-75"
-            onClick={login}
-          >
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="h-5 w-5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
-            </div>
-          </button>
+          <Button func={login} />
         </div>
+        {loginError ? loginErrorElement : <p></p>}
       </div>
       <div
         id="signup"
@@ -128,50 +159,16 @@ export default function Login({
           className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
           placeholder="Confirm Password..."
           onChange={(event) => {
+            setSignUpError(false);
+            setLoginError(false);
             setConfirmPW(event.target.value);
           }}
         />
         <br />
         <div className="text-center">
-          <button
-            className="bg-green-300 
-          
-    text-lg
-    text-black
-    h-auto 
-    w-max 
-    transition
-    transform
-    duration-700
-    hover:scale-110
-    text-center 
-    font-rob 
-    pt-2
-    pb-2
-    px-4
-    rounded-lg
-    focus:outline-none
-    active:opacity-75"
-            onClick={register}
-          >
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="h-5 w-5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
-            </div>
-          </button>
+          <Button func={register} />
         </div>
+        {signUpError ? signUpErrorElement : <div></div>}
       </div>
     </div>
   );

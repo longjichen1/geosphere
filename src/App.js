@@ -4,13 +4,18 @@ import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Welcome from "./components/Welcome";
 import React, { useEffect, useState } from "react";
+import About from "./components/About";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase-config.js";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { auth, firestore } from "./firebase-config.js";
 function App() {
+  const [photoData, setPhotoData] = useState("");
   const [blur, setBlur] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginBox, setLoginBox] = useState(false);
+  const [about, setAbout] = useState(false);
   const [user, setUser] = useState({});
+
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -30,6 +35,8 @@ function App() {
         setLoggedIn={setLoggedIn}
         loginBox={loginBox}
         setLoginBox={setLoginBox}
+        about={about}
+        setAbout={setAbout}
       />
       {loggedIn ? (
         <div></div>
@@ -41,14 +48,18 @@ function App() {
           setLoggedIn={setLoggedIn}
           loginBox={loginBox}
           setLoginBox={setLoginBox}
+          photoData={photoData}
         />
       )}
-
+      <About blur={blur} about={about} setAbout={setAbout} />
       <Welcome
         blur={blur}
         setBlur={setBlur}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
+        photoData={photoData}
+        setPhotoData={setPhotoData}
+        user={user}
       />
     </>
   );

@@ -1,7 +1,29 @@
 import React, { useState, useEffect } from "react";
-
-export default function Welcome({ blur, setBlur, loggedIn, setLoggedIn }) {
-  const [photoData, setPhotoData] = useState("");
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth, firestore } from "../firebase-config";
+export default function Welcome({
+  blur,
+  setBlur,
+  loggedIn,
+  setLoggedIn,
+  photoData,
+  setPhotoData,
+  user,
+}) {
+  const [like, setLike] = useState(false);
   const [started, setStarted] = useState(false);
   const [started2, setStarted2] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -60,12 +82,31 @@ export default function Welcome({ blur, setBlur, loggedIn, setLoggedIn }) {
       } else {
         toggleFirst(true);
       }
+      setLike(false);
       setTimeout(function () {
         fetchPhoto(`&date=${generateRandomDate()}`);
       }, 600);
     }
   };
 
+  const addPhoto = () => {
+    if (like) {
+      setLike(false);
+      console.log("delete");
+      deleteDoc(doc(firestore, `users/${user.uid}/likes`, photoData.date));
+    } else {
+      const ref = setDoc(
+        doc(firestore, `users/${user.uid}/likes`, photoData.date),
+        {
+          photoTitle: photoData.title,
+          photoDate: photoData.date,
+          photoImage: photoData.url,
+          photoDescription: photoData.explanation,
+        }
+      );
+      setLike(true);
+    }
+  };
   return (
     <>
       {startButton}
@@ -121,7 +162,12 @@ export default function Welcome({ blur, setBlur, loggedIn, setLoggedIn }) {
           } transform duration-1000 absolute  top-2 left-4 block border-4 border-white`}
         >
           {/* <img style={{borderRadius:"48px"}} className={`${first?'opacity-0 delay-200':'opacity-100 delay-500'} transform duration-1000 h-full w-full flex-shrink-0 flex`} src={photoData? photoData.url: ''} alt="" /> */}
-          <button className={`absolute bottom-8 left-8`}>👍</button>
+          <button
+            onClick={() => addPhoto(photoData)}
+            className={`absolute bottom-8 left-8`}
+          >
+            👍
+          </button>
         </div>
         <div
           style={{ width: "60%" }}
