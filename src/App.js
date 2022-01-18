@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
+import Gallery from "./components/Gallery";
 import Welcome from "./components/Welcome";
 import React, { useEffect, useState } from "react";
 import About from "./components/About";
@@ -15,7 +16,7 @@ function App() {
   const [loginBox, setLoginBox] = useState(false);
   const [about, setAbout] = useState(false);
   const [user, setUser] = useState({});
-
+  const [gallery, setGallery] = useState(false);
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -37,6 +38,8 @@ function App() {
         setLoginBox={setLoginBox}
         about={about}
         setAbout={setAbout}
+        gallery={gallery}
+        setGallery={setGallery}
       />
       {loggedIn ? (
         <div></div>
@@ -52,6 +55,7 @@ function App() {
         />
       )}
       <About blur={blur} about={about} setAbout={setAbout} />
+      <Gallery blur={blur} gallery={gallery} setGallery={setGallery} />
       <Welcome
         blur={blur}
         setBlur={setBlur}

@@ -26,10 +26,14 @@ export default function About({ blur, about, setAbout }) {
       </p>
       <ul className="text-center mt-3 ">
         <li className="w-[5rem] inline-block m-2 border-2 border-slate-400 rounded-full">
-          <img src={Github} alt="Github" />
+          <a href="https://github.com/longjichen1">
+            <img src={Github} alt="Github" />
+          </a>
         </li>
         <li className="w-[5rem]  inline-block m-2 border-2 border-slate-400 rounded-full">
-          <img src={LinkedIn} alt="Linkedin"></img>
+          <a href="https://www.linkedin.com/in/longjichen/">
+            <img src={LinkedIn} alt="Linkedin"></img>
+          </a>
         </li>
       </ul>
     </div>

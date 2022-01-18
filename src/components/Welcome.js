@@ -27,7 +27,7 @@ export default function Welcome({
   const [started, setStarted] = useState(false);
   const [started2, setStarted2] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [first, toggleFirst] = useState(false);
+  const [first, toggleFirst] = useState(true);
   const generateRandomDate = () => {
     const year = Math.floor(Math.random() * 18) + 1;
     const date = Math.floor(Math.random() * 27) + 1;
@@ -77,11 +77,9 @@ export default function Welcome({
   );
   const changePhoto = () => {
     if (!blur) {
-      if (first === true) {
-        toggleFirst(false);
-      } else {
-        toggleFirst(true);
-      }
+      toggleFirst(false);
+      setTimeout(toggleFirst(true), 2000);
+
       setLike(false);
       setTimeout(function () {
         fetchPhoto(`&date=${generateRandomDate()}`);
@@ -90,23 +88,64 @@ export default function Welcome({
   };
 
   const addPhoto = () => {
-    if (like) {
-      setLike(false);
-      console.log("delete");
-      deleteDoc(doc(firestore, `users/${user.uid}/likes`, photoData.date));
+    if (loggedIn) {
+      if (like) {
+        setLike(false);
+        console.log("delete");
+        deleteDoc(doc(firestore, `users/${user.uid}/likes`, photoData.date));
+      } else {
+        const ref = setDoc(
+          doc(firestore, `users/${user.uid}/likes`, photoData.date),
+          {
+            photoTitle: photoData.title,
+            photoDate: photoData.date,
+            photoImage: photoData.url,
+            photoDescription: photoData.explanation,
+          }
+        );
+        setLike(true);
+      }
     } else {
-      const ref = setDoc(
-        doc(firestore, `users/${user.uid}/likes`, photoData.date),
-        {
-          photoTitle: photoData.title,
-          photoDate: photoData.date,
-          photoImage: photoData.url,
-          photoDescription: photoData.explanation,
-        }
-      );
-      setLike(true);
+      alert("Sign in to like and save your images!");
     }
   };
+
+  const explanation = (
+    <>
+      <div className={`max-h-[25rem] m-4 overflow-x-hidden overflow-y-scroll `}>
+        {photoData ? (
+          <p
+            style={{ maxWidth: "80%" }}
+            className=" inline-block text-center duration-1000 text-2xl  transform"
+          >
+            {photoData.explanation}
+          </p>
+        ) : (
+          <p></p>
+        )}
+      </div>
+    </>
+  );
+
+  const scrollArrow = (
+    <div className="max-h-[25rem] m-4 overflow-hidden inline-block text-center animate-bounce bg-gradient-to-r bg-clip-text from-blue-500 to-red-500 duration-200 transform">
+      <p className="text-sm">Scroll</p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-3 w-3 stroke-rose-300 m-auto"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="none"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+        />
+      </svg>
+    </div>
+  );
   return (
     <>
       {startButton}
@@ -115,9 +154,7 @@ export default function Welcome({
           marginTop: "8%",
           maxWidth: "75%",
           height: "50%",
-          borderTopLeftRadius: "48px",
-          borderBottomLeftRadius: "48px",
-          borderTopRightRadius: "108px",
+          borderRadius: "48px",
         }}
         className={`${
           blur ? "blur-sm delay-[0ms]" : ""
@@ -129,56 +166,65 @@ export default function Welcome({
           expanded
             ? " scale-100  transform duration-[2200]"
             : "p-4 duration-500 origin-center"
-        } border-8 border-orange-400 absolute`}
+        } border-8 border-orange-400 absolute overflow-x-hidden`}
       >
         <div
           style={{
-            borderRadius: "50px",
-            height: "94%",
+            borderTopLeftRadius: "50px",
+            borderTopRightRadius: "50px",
+            height: "90%",
             width: "40%",
-            top: "3%",
-            left: "1%",
-            backgroundImage: `url('${photoData.url}')`,
-            backgroundSize: "cover",
-          }}
-          className={`${blur ? "blur-sm" : ""} absolute ${
-            first ? " delay-75" : "opacity-100 delay-300"
-          } transform top-2 left-4 block border-4 absolute border-white`}
-        >
-          {/* <img style={{borderRadius:"48px"}} className={`${!first?'opacity-0 delay-200':'opacity-100 delay-500'} transform duration-1000 h-full w-full flex-shrink-0 flex`} src={photoData? photoData.url: ''} alt="" /> */}
-        </div>
-        <div
-          style={{
-            borderRadius: "50px",
-            height: "94%",
-            width: "40%",
-            top: "3%",
-            left: "1%",
+            left: "2%",
             backgroundImage: `url('${photoData.url}')`,
             backgroundSize: "cover",
           }}
           className={`${blur ? "blur-sm" : ""} ${
             first ? "delay-75" : "opacity-100 delay-300"
-          } transform duration-1000 absolute  top-2 left-4 block border-4 border-white`}
+          } transform duration-1000 absolute  top-2 left-4 block border-8  overflow-x-hidden border-slate-800`}
         >
           {/* <img style={{borderRadius:"48px"}} className={`${first?'opacity-0 delay-200':'opacity-100 delay-500'} transform duration-1000 h-full w-full flex-shrink-0 flex`} src={photoData? photoData.url: ''} alt="" /> */}
-          <button
-            onClick={() => addPhoto(photoData)}
-            className={`absolute bottom-8 left-8`}
-          >
-            👍
+        </div>
+        <div
+          style={{
+            borderBottomLeftRadius: "50px",
+            borderBottomRightRadius: "50px",
+            height: "10%",
+            width: "40%",
+            left: "2%",
+          }}
+          className={`${
+            blur ? "blur-sm" : ""
+          } bg-black bg-opacity-40 transform duration-1000 absolute  bottom-0 left-4 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
+        >
+          <button onClick={() => addPhoto(photoData)} className={` p-1`}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class={`h-10 w-10 text-center${
+                like ? "border-red-500" : "border-white"
+              } `}
+              fill={like ? "red" : "white"}
+              viewBox="0 0 24 24"
+              stroke="none"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
           </button>
         </div>
         <div
-          style={{ width: "60%" }}
-          className={`absolute top-4 right-0 ${
+          style={{ width: "70%" }}
+          className={`absolute top-4 -right-24 overflow-x-hidden ${
             !first
               ? " opacity-0 duration-700"
               : "opacity-100 delay-700 duration-700"
           } transform`}
         >
           {photoData ? (
-            <p className="text-center  duration-1000 transform">
+            <p className="text-center text-3xl duration-1000 transform">
               {photoData.title}
             </p>
           ) : (
@@ -193,52 +239,14 @@ export default function Welcome({
             <p></p>
           )}
           <br />
-          {photoData ? (
-            <p
-              style={{ maxWidth: "80%", fontSize: "16px" }}
-              className="inline-block text-center duration-1000 transform"
-            >
-              {photoData.explanation}
-            </p>
+          {explanation}
+          {photoData && photoData.explanation.length > 840 ? (
+            scrollArrow
           ) : (
-            <p></p>
+            <div></div>
           )}
         </div>
-        <div
-          style={{ width: "60%" }}
-          className={`absolute top-4 right-0 ${
-            first
-              ? "opacity-0 duration-700"
-              : "opacity-100 delay-700 duration-700"
-          } transform `}
-        >
-          {photoData ? (
-            <p className="text-center  duration-1000 transform">
-              {photoData.title}
-            </p>
-          ) : (
-            <p></p>
-          )}
 
-          {photoData ? (
-            <p className="inline-block text-center  text-sm duration-1000 transform">
-              {photoData.date}
-            </p>
-          ) : (
-            <p></p>
-          )}
-          <br />
-          {photoData ? (
-            <p
-              style={{ maxWidth: "80%", fontSize: "16px" }}
-              className="inline-block text-center duration-1000 transform"
-            >
-              {photoData.explanation}
-            </p>
-          ) : (
-            <p></p>
-          )}
-        </div>
         <br />
         <button
           className="absolute bottom-4 right-4"

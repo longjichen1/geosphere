@@ -12,6 +12,8 @@ function Nav({
   setLoginBox,
   about,
   setAbout,
+  gallery,
+  setGallery,
 }) {
   const logout = () => {
     signOut(auth);
@@ -31,6 +33,14 @@ function Nav({
         setLoginBox(false);
       } else {
         setLoginBox(true);
+        setAbout(false);
+      }
+    } else {
+      if (gallery) {
+        setGallery(false);
+      } else {
+        setGallery(true);
+        setAbout(false);
       }
     }
   }
@@ -39,6 +49,8 @@ function Nav({
     if (about) {
       setAbout(false);
     } else {
+      setLoginBox(false);
+      setGallery(false);
       setAbout(true);
     }
   }
