@@ -56,19 +56,19 @@ export default function Welcome({
       setExpanded(true);
     }, 400);
   };
+
   const startButton = (
     <>
       <div
-        style={{ maxWidth: "30%", marginTop: "19%" }}
-        className={` ${blur ? "blur-sm" : ""}  ${
+        className={` ${blur ? "blur-sm" : ""} max-w-[30%] xl:max-w-[25%] ${
           started ? "scale-0 duration-500" : "duration-700"
         } ${
           started2 ? "absolute" : ""
-        } hover:bg-opacity-0 hover:bg-slate-600 hover:text-orange-800 hover:delay-200 bg-slate-800 bg-opacity-70  group m-auto outline rounded-full outline-8 outline-white p-4 text-center`}
+        } absolute top-[45%] left-0 right-0 hover:bg-opacity-0 hover:bg-slate-600 hover:text-orange-800 hover:delay-200 bg-slate-800 bg-opacity-70  group m-auto outline rounded-full outline-8 outline-white p-4 text-center`}
       >
         <h1
           onClick={() => handleStarted()}
-          className="p-3 h-max w-max mx-auto text-center pt-1/2 text-7xl text-white uppercase font-semibold hover:text-transparent bg-clip-text bg-gradient-to-r duration-300 from-blue-400 to-orange-600"
+          className="p-3 xl:text-5xl sm:text-xl md:text-3xl lg:text-4xl h-max w-max mx-auto text-center pt-1/2 text-7xl text-white uppercase font-semibold hover:text-transparent bg-clip-text bg-gradient-to-r duration-300 from-blue-400 to-orange-600"
         >
           Get started
         </h1>
@@ -112,12 +112,11 @@ export default function Welcome({
 
   const explanation = (
     <>
-      <div className={`max-h-[25rem] m-4 overflow-x-hidden overflow-y-scroll `}>
+      <div
+        className={`max-h-[25rem]  overflow-x-hidden scrollbar-hide overflow-y-scroll `}
+      >
         {photoData ? (
-          <p
-            style={{ maxWidth: "80%" }}
-            className=" inline-block text-center duration-1000 text-2xl  transform"
-          >
+          <p className="w-[80%] inline-block text-center duration-1000 text-2xl  transform">
             {photoData.explanation}
           </p>
         ) : (
@@ -150,13 +149,7 @@ export default function Welcome({
     <>
       {startButton}
       <div
-        style={{
-          marginTop: "8%",
-          maxWidth: "75%",
-          height: "50%",
-          borderRadius: "48px",
-        }}
-        className={`${
+        className={`mt-[150px] max-w-[75%] h-[50%] rounded-[48px] ${
           blur ? "blur-sm delay-[0ms]" : ""
         }  text-white duration-1000 relative ${
           started ? "p-72  scale-100 " : " p-0 scale-0"
@@ -170,31 +163,20 @@ export default function Welcome({
       >
         <div
           style={{
-            borderTopLeftRadius: "50px",
-            borderTopRightRadius: "50px",
-            height: "90%",
-            width: "40%",
-            left: "2%",
             backgroundImage: `url('${photoData.url}')`,
-            backgroundSize: "cover",
           }}
-          className={`${blur ? "blur-sm" : ""} ${
+          className={`${
+            blur ? "blur-sm" : ""
+          } left-[2%] w-[40%] h-[90%] rounded-t-[50px] bg-auto ${
             first ? "delay-75" : "opacity-100 delay-300"
           } transform duration-1000 absolute  top-2 left-4 block border-8  overflow-x-hidden border-slate-800`}
         >
           {/* <img style={{borderRadius:"48px"}} className={`${first?'opacity-0 delay-200':'opacity-100 delay-500'} transform duration-1000 h-full w-full flex-shrink-0 flex`} src={photoData? photoData.url: ''} alt="" /> */}
         </div>
         <div
-          style={{
-            borderBottomLeftRadius: "50px",
-            borderBottomRightRadius: "50px",
-            height: "10%",
-            width: "40%",
-            left: "2%",
-          }}
           className={`${
             blur ? "blur-sm" : ""
-          } bg-black bg-opacity-40 transform duration-500 absolute hover:bg-opacity-60 bottom-0 left-4 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
+          } bg-black bg-opacity-40 transform duration-500 absolute rounded-b-[50px] h-[10%] w-[40%] left-[2%] hover:bg-opacity-60 bottom-0 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
         >
           <button
             onClick={() => addPhoto(photoData)}
@@ -218,10 +200,28 @@ export default function Welcome({
               />
             </svg>
           </button>
+          <button
+            onClick={changePhoto}
+            className="absolute right-5 bottom-0 top-0 animate-pulse "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 hover:stroke-red-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
         </div>
         <div
-          style={{ width: "70%" }}
-          className={`absolute top-4 -right-24 overflow-x-hidden ${
+          className={`absolute top-4 text-center right-0 w-[60%] overflow-x-hidden ${
             !first
               ? " opacity-0 duration-700"
               : "opacity-100 delay-700 duration-700"
@@ -252,12 +252,6 @@ export default function Welcome({
         </div>
 
         <br />
-        <button
-          className="absolute bottom-4 right-4"
-          onClick={() => changePhoto()}
-        >
-          Next Image
-        </button>
       </div>
     </>
   );

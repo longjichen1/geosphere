@@ -16,6 +16,8 @@ function Nav({
   setGallery,
 }) {
   const logout = () => {
+    setAbout(false);
+    setGallery(false);
     signOut(auth);
   };
   function handleBlur() {
@@ -62,17 +64,9 @@ function Nav({
         id="background"
         className={`background h-screen ${
           blur ? "blur-sm saturate-50" : "blur-none saturate-100"
-        } -z-20 transition-all duration-300`}
+        } -z-20 transition-all duration-300 bg-bottom bg-cover bg-repeat absolute left-0 right-0 top-0 bottom-0`}
         style={{
           backgroundImage: `url(${image})`,
-          backgroundPosition: "bottom",
-          backgroundSize: "cover",
-          position: "absolute",
-          backgroundRepeat: "repeat",
-          left: "0",
-          right: "0",
-          top: "0",
-          bottom: "0",
         }}
       ></div>
 
@@ -89,9 +83,8 @@ function Nav({
                 !blur
                   ? "animate-pulse hover:outline-slate-900 hover:duration-150"
                   : "hover:outline-slate-900 hover:duration-150"
-              } delay-200 p-0  z-40 outline outline-4 outline-white outline-offset-4 rounded-full  `}
+              } delay-200 p-0  z-40 outline max-w-[70px] outline-4 m-0 outline-white outline-offset-4 rounded-full  `}
               src={earthLogo}
-              style={{ maxWidth: 70, margin: 0 }}
             ></img>
             <span className="z-40 font-semibold text-3xl tracking-widest pl-7">
               <a href="/">GeoSphere</a>

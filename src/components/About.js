@@ -4,21 +4,19 @@ import Github from "../images/github.png";
 export default function About({ blur, about, setAbout }) {
   return (
     <div
-      className={`border-white border-4 absolute m-auto left-0 right-0 w-[78rem] ${
+      className={`border-white border-4 absolute m-auto left-0 right-0 lg:w-[50%] xl:w-[60%] md:w-[40%] w-[78rem] ${
         about && blur ? "opacity-100" : "opacity-0 scale-0"
-      } top-0 bottom-0 h-[45rem] rounded-3xl z-40 transform duration-300 bg-slate-800 bg-opacity-80 text-3xl`}
+      } top-0 bottom-0 h-[45rem] rounded-3xl z-40 transform duration-300 bg-slate-800 bg-opacity-80 text-3xl lg:h-[60%] xl:text-xl sm:h-[60%] lg:text-md md:text-sm`}
     >
       <img
         src={`https://media-exp1.licdn.com/dms/image/C4E03AQF094hQl2ZZMA/profile-displayphoto-shrink_100_100/0/1641619885481?e=1648080000&v=beta&t=BGvSL7UhhTSsL4zHU57bdNZb_0PhdVZRsiTJIQ73hBw`}
         alt=""
         className="h-48 mx-auto border-white border-4 rounded-full my-8"
       />
-      <p className="text-slate-300 text-center">
+      <p className="text-slate-300 text-center ">
         Hello! My name is Longji Chen, and I am a self-taught developer studying
-        at Vanderbilt University. This app was designed for the Shopify
-        Front-End Intern 2022 Challenge.
+        at Vanderbilt University.
       </p>
-      <br />
       <br />
       <p className="w-1/2  m-auto text-transparent  bg-clip-text bg-gradient-to-r from-blue-400 to-red-400  text-center">
         Check out some cool images from NASA APOD (Astronomy Picture of the
