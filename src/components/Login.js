@@ -164,7 +164,7 @@ export default function Login({
         <br />
         <input
           type="password"
-          className={`text-black xl:text-3xl sm:p-3 w-3/4 sm:text-md p-6 border-4 border-none rounded-3xl m-auto block`}
+          className={`text-black xl:text-3xl sm:p-3 w-3/4 sm:text-md xl:p-6 border-4 border-none rounded-3xl m-auto block`}
           placeholder="Confirm Password..."
           onChange={(event) => {
             setSignUpError(false);

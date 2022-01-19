@@ -55,7 +55,12 @@ function App() {
         />
       )}
       <About blur={blur} about={about} setAbout={setAbout} />
-      <Gallery blur={blur} gallery={gallery} setGallery={setGallery} />
+      <Gallery
+        blur={blur}
+        gallery={gallery}
+        setGallery={setGallery}
+        user={user}
+      />
       <Welcome
         blur={blur}
         setBlur={setBlur}

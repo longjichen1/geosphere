@@ -176,7 +176,7 @@ export default function Welcome({
         <div
           className={`${
             blur ? "blur-sm" : ""
-          } bg-black bg-opacity-40 transform duration-500 absolute rounded-b-[50px] h-[10%] w-[40%] left-[2%] hover:bg-opacity-60 bottom-0 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
+          } bg-black bg-opacity-40 transform duration-500 absolute rounded-b-[50px] h-[10%] w-[40%] left-4 hover:bg-opacity-60 bottom-0 block border-b-8 border-r-8 border-t-4 border-l-8  border-slate-800`}
         >
           <button
             onClick={() => addPhoto(photoData)}
