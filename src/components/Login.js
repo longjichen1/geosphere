@@ -32,6 +32,7 @@ export default function Login({
         setLoggedIn(true);
         setTimeout(setSignUpError(false), 1000);
       } catch (error) {
+        setSignUpError(true);
         console.log(error.message);
       }
     } else {
@@ -51,42 +52,49 @@ export default function Login({
   };
   const loginErrorElement = (
     <>
-      <br />
-      <p className="text-red-600 transform duration-500 opacity-100 text-center w-5/6 m-auto text-2xl">
-        Invalid Email/Password Combination. Please try again!
-      </p>
+      
+
+      {password && password.length < 6 ? (
+        <p className="text-red-600 text-center sm:text-[10px] xl:text-xl lg:text-sm ">
+          Password must be at least 6 characters in length!
+        </p>
+      ) : (
+        <p className="text-red-600 transform duration-500 opacity-100 sm:text-[10px] lg:text-sm text-center w-5/6 m-auto xl:text-xl sm:text-md">
+          Invalid Email/Password Combination. Please try again!
+        </p>
+      )}
     </>
   );
 
   const signUpErrorPassword = (
     <>
-      {confirmPW.length >= 8 ? (
-        <p className="text-red-600 text-center text-3xl">
+      {confirmPW.length >= 6 ? (
+        <p className="text-red-600 text-center xl:text-xl sm:text-[10px] lg:text-sm sm:text-md">
           Email already in use!
         </p>
       ) : (
-        <p className="text-red-600 text-center text-3xl">
-          Password must be at least 8 characters in length!
+        <p className="text-red-600 text-center xl:text-xl sm:text-[10px] lg:text-sm sm:text-md">
+          Password must be at least 6 characters in length!
         </p>
       )}
     </>
   );
   const signUpErrorElement = (
     <>
-      <br />
+      
 
       {!(confirmPW === password) ? (
-        <p className="text-red-600 text-center text-2xl">
+        <p className="text-red-600 text-center xl:text-xl sm:text-[10px] lg:text-sm sm:text-md">
           Passwords do not match!
         </p>
       ) : (
         <>
-          {password.length >= 8 ? (
-            <p className="text-red-600 text-center text-2xl">
+          {password.length >= 6 ? (
+            <p className="text-red-600 text-center xl:text-xl sm:text-[10px] lg:text-sm sm:text-md">
               Email already in use!
             </p>
           ) : (
-            <p className="text-red-600 text-center text-2xl">
+            <p className="text-red-600 text-center xl:text-xl sm:text-[10px] lg:text-sm sm:text-lg">
               Password must be at least 6 characters in length!
             </p>
           )}
@@ -100,7 +108,7 @@ export default function Login({
       <br />
       <input
         type="email"
-        className={`invalid:text-red-600 required invalid:border-red-600 text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+        className={`invalid:text-red-600 lg:text-sm lg:p-2 sm:p-1  w-3/4 sm:text-[10px] my-3 required invalid:border-red-600 text-black xl:text-xl xl:p-4 border-4 border-none rounded-3xl m-auto block`}
         placeholder="Email..."
         onChange={(event) => {
           setSignUpError(false);
@@ -108,10 +116,10 @@ export default function Login({
           setEmail(event.target.value);
         }}
       />
-      <br />
+      
       <input
         type="password"
-        className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+        className={`text-black xl:text-xl lg:text-sm lg:p-2 xl:p-4 sm:p-1  sm:text-[10px] my-3 w-3/4 border-4 border-none rounded-3xl m-auto block`}
         placeholder="Password..."
         onChange={(event) => {
           setSignUpError(false);
@@ -123,40 +131,40 @@ export default function Login({
   );
   const loginElement = (
     <div
-      className={`border-white border-4 absolute m-auto left-0 right-0 w-[78rem] ${
+      className={`border-white border-4 absolute m-auto left-0 right-0 xl:w-[70%] xl:h-[70%] sm:w-[50%] sm:text-sm sm:h-[70%] lg:w-[50%] lg:h-[90%]  ${
         loginBox && blur ? "opacity-100" : "opacity-0 scale-0"
-      } top-0 bottom-0 h-[45rem] rounded-3xl z-40 transform duration-300 bg-slate-800 bg-opacity-80 text-3xl`}
+      } top-0 bottom-0 rounded-3xl z-40 transform duration-300 bg-slate-800 bg-opacity-80 text-3xl`}
     >
       <div
         id="login"
-        className={`absolute top-0 m-auto bottom-0 left-8 overflow-hidden inline-block  h-[38rem] w-[35rem] rounded-3xl border-blue-600 border-4`}
+        className={`absolute xl:top-0 m-auto xl:bottom-0 left-8 sm:-left-0 sm:block overflow-hidden inline-block xl:text-3xl lg:text-xl md:text-sm xl:h-[90%] xl:w-[45%] rounded-3xl sm:w-[100%] sm:h-[45%]  border-blue-600 border-4`}
       >
         <h1
-          className={`text-white text-center bg-blue-900 p-4 z-38 border-blue-600 border-b-4 `}
+          className={`text-white text-center bg-blue-900 p-4 sm:p-2 z-38 border-blue-600 border-b-4 `}
         >
           Login
         </h1>
         {inputForm}
-        <br />
-        <div className="text-center">
+        
+        <div className="my-2 text-center">
           <Button func={login} />
         </div>
         {loginError ? loginErrorElement : <p></p>}
       </div>
       <div
         id="signup"
-        className={`absolute inline-block m-auto top-0 bottom-0 overflow-hidden h-[38rem] border-4 border-red-400 rounded-3xl w-[35rem] right-8`}
+        className={`absolute sm:top-[46%] sm:-bottom-0 sm:block sm:-right-0 sm:w-full inline-block xl:text-3xl lg:text-xl md:text-sm m-auto xl:top-0 xl:bottom-0 overflow-hidden sm:h-[55%] xl:h-[90%] xl:w-[45%] border-4 border-red-400 rounded-3xl right-8`}
       >
         <h1
-          className={`text-white text-center bg-orange-700 p-4 z-38 border-red-400 border-b-4 `}
+          className={`text-white text-center bg-orange-700 sm:p-2  p-4 z-38 border-red-400 border-b-4 `}
         >
           Sign Up
         </h1>
         {inputForm}
-        <br />
+        
         <input
           type="password"
-          className={`text-black text-3xl p-6 border-4 border-none rounded-3xl m-auto block`}
+          className={`text-black my-3  w-3/4 sm:p-1 sm:text-[10px] xl:text-xl xl:p-4 lg:text-sm lg:p-2 border-4 border-none rounded-3xl m-auto block`}
           placeholder="Confirm Password..."
           onChange={(event) => {
             setSignUpError(false);
@@ -164,8 +172,8 @@ export default function Login({
             setConfirmPW(event.target.value);
           }}
         />
-        <br />
-        <div className="text-center">
+        
+        <div className="my-2 text-center">
           <Button func={register} />
         </div>
         {signUpError ? signUpErrorElement : <div></div>}

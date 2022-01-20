@@ -10,6 +10,7 @@ export default function Button({ func }) {
     text-black
     h-auto 
     w-max 
+    
     transition
     transform
     duration-700
@@ -18,6 +19,8 @@ export default function Button({ func }) {
     font-rob 
     pt-2
     pb-2
+    sm:pt-1
+    sm:pb-1
     px-4
     rounded-lg
     focus:outline-none
@@ -30,7 +33,7 @@ export default function Button({ func }) {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          className="h-5 w-5"
+          className="lg:h-5 lg:w-5 sm:h-2 sm:w-2"
         >
           <path
             strokeLinecap="round"

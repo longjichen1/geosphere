@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.fade {
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+
+.fade2 {
+  -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent);
+}

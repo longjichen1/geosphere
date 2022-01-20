@@ -9,7 +9,11 @@ import About from "./components/About";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { auth, firestore } from "./firebase-config.js";
+const state = { pptd: [] , remove:[]};
 function App() {
+  const [d, setD] = useState(false);
+  const [a, setA] = useState(true);
+  const [like, setLike] = useState(false);
   const [photoData, setPhotoData] = useState("");
   const [blur, setBlur] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -17,6 +21,7 @@ function App() {
   const [about, setAbout] = useState(false);
   const [user, setUser] = useState({});
   const [gallery, setGallery] = useState(false);
+
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -40,6 +45,8 @@ function App() {
         setAbout={setAbout}
         gallery={gallery}
         setGallery={setGallery}
+        state={state}
+        setLike={setLike}
       />
       {loggedIn ? (
         <div></div>
@@ -55,7 +62,20 @@ function App() {
         />
       )}
       <About blur={blur} about={about} setAbout={setAbout} />
-      <Gallery blur={blur} gallery={gallery} setGallery={setGallery} />
+      <Gallery
+        blur={blur}
+        gallery={gallery}
+        setGallery={setGallery}
+        user={user}
+        state={state}
+        like={like}
+        d={d}
+        setD={setD}
+        a={a}
+        setA={setA}
+        photoData={photoData}
+        setLike={setLike}
+      />
       <Welcome
         blur={blur}
         setBlur={setBlur}
@@ -64,6 +84,11 @@ function App() {
         photoData={photoData}
         setPhotoData={setPhotoData}
         user={user}
+        like={like}
+        setLike={setLike}
+        state = {state}
+        a={a}
+        d={d}
       />
     </>
   );

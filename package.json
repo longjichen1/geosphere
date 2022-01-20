@@ -1,7 +1,6 @@
 {
-  
   "name": "geosphere",
-  "homepage" : "https://longjichen1.github.io/geosphere",
+  "homepage": "https://longjichen1.github.io/geosphere",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,6 +13,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
     "react-youtube": "^7.14.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.3"
   },
   "scripts": {
