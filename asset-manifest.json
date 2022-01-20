@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/geosphere/static/css/main.ab31c290.css",
+    "main.js": "/geosphere/static/js/main.d6718ca8.js",
+    "static/js/787.62286950.chunk.js": "/geosphere/static/js/787.62286950.chunk.js",
+    "static/media/light.jpg": "/geosphere/static/media/light.236b32951f11aa895718.jpg",
+    "static/media/linkedin.png": "/geosphere/static/media/linkedin.aeafa15de56e9321658f.png",
+    "static/media/github.png": "/geosphere/static/media/github.810189eb4fe436ba86ac.png",
+    "static/media/logo.svg": "/geosphere/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/geosphere/index.html",
+    "main.ab31c290.css.map": "/geosphere/static/css/main.ab31c290.css.map",
+    "main.d6718ca8.js.map": "/geosphere/static/js/main.d6718ca8.js.map",
+    "787.62286950.chunk.js.map": "/geosphere/static/js/787.62286950.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab31c290.css",
+    "static/js/main.d6718ca8.js"
+  ]
+}
