@@ -22,8 +22,12 @@ export default function Welcome({
   photoData,
   setPhotoData,
   user,
+  like,
+  setLike,
+  state,
+  a,
+  d
 }) {
-  const [like, setLike] = useState(false);
   const [started, setStarted] = useState(false);
   const [started2, setStarted2] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -113,7 +117,7 @@ export default function Welcome({
   const explanation = (
     <>
       <div
-        className={`max-h-[25rem]  overflow-x-hidden scrollbar-hide overflow-y-scroll `}
+        className={`max-h-[25rem] pt-5 mt-4 pb-12 fade2 overflow-x-hidden scrollbar-hide overflow-y-scroll `}
       >
         {photoData ? (
           <p className="w-[80%] inline-block text-center duration-1000 text-2xl  transform">
@@ -149,7 +153,7 @@ export default function Welcome({
     <>
       {startButton}
       <div
-        className={`mt-[150px] max-w-[75%] h-[50%] rounded-[48px] ${
+        className={`mt-[5%] max-w-[75%] h-[50%] rounded-[48px] ${
           blur ? "blur-sm delay-[0ms]" : ""
         }  text-white duration-1000 relative ${
           started ? "p-72  scale-100 " : " p-0 scale-0"
@@ -168,8 +172,8 @@ export default function Welcome({
           className={`${
             blur ? "blur-sm" : ""
           } left-[2%] w-[40%] h-[90%] rounded-t-[50px] bg-auto ${
-            first ? "delay-75" : "opacity-100 delay-300"
-          } transform duration-1000 absolute  top-2 left-4 block border-8  overflow-x-hidden border-slate-800`}
+            first ? "delay-[0ms]" : "delay-[0ms] opacity-100 "
+          } transform duration-500 absolute  top-2 left-4 block border-8  overflow-x-hidden border-slate-800`}
         >
           {/* <img style={{borderRadius:"48px"}} className={`${first?'opacity-0 delay-200':'opacity-100 delay-500'} transform duration-1000 h-full w-full flex-shrink-0 flex`} src={photoData? photoData.url: ''} alt="" /> */}
         </div>
@@ -187,8 +191,8 @@ export default function Welcome({
               class={`h-10 w-10 text-center ${
                 like
                   ? "border-red-600 fill-red-600"
-                  : "border-white fill-white hover:fill-red-400 "
-              } hover:border-pink-400 p-1 animate-pulse`}
+                  : "border-white fill-white hover:fill-red-100 "
+              } hover:border-pink-400 p-1 `}
               viewBox="0 0 24 24"
               stroke="none"
             >
@@ -202,7 +206,7 @@ export default function Welcome({
           </button>
           <button
             onClick={changePhoto}
-            className="absolute right-5 bottom-0 top-0 animate-pulse "
+            className="absolute right-5 bottom-0 top-0 "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -14,11 +14,15 @@ function Nav({
   setAbout,
   gallery,
   setGallery,
+  state,
+  setLike,
 }) {
   const logout = () => {
     setAbout(false);
     setGallery(false);
     signOut(auth);
+    state.pptd = [];
+    setLike(false);
   };
   function handleBlur() {
     if (blur === true) {
